@@ -1,3 +1,4 @@
+
 .wrapper{
 	display:flex;
 	flex:1;
@@ -17,8 +18,9 @@
 .pomodoro-window * {
 	color:white;
 }
-.length-text,.length-time-adjuster{
+.length-text,#length-time-adjuster{
 	display: flex;
+	flex-flow: row nowrap;
 	justify-content: space-around;
 }
 .pomodoro-window span{
