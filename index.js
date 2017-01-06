@@ -1,4 +1,5 @@
 
+
 // mustache the numbers, add on click event to + & -, write functions to handle the data
 // how to set a timer that counts down the time when start button is pressed, how to play a sound when time is up
 
@@ -31,6 +32,7 @@ var app = new Vue({
 		timerID:null,
 		state:STOP,
 		stateMsg:'Session',
+		run: false
 	},
 	computed:{
 		display:function(){
@@ -48,8 +50,8 @@ var app = new Vue({
 		},
 		sessionSecond:function(){
 			var sessionSeconds = ((this.counter / 1000) % 60) | 0;
-			if(sessionSeconds < 10) return '0' + sessionMinutes;
-			else return sessionMinutes;
+			if(sessionSeconds < 10) return '0' + sessionSeconds;
+			else return sessionSeconds;
 		}
 	}, 
 	ready: function(){
@@ -68,9 +70,9 @@ var app = new Vue({
 		minusBreakLength: function(){
 			this.breakLength = this.breakLength - 1; 
 		},
-
 		start:function(){
-			if(this.state != START){
+				if(this.state != START){
+				this.run = false;
 				this.state = START;
 				this.startTime = Date.now();
 
@@ -79,16 +81,19 @@ var app = new Vue({
 				if(newLimit != this.limit) {
 					this.limit = newLimit;
 					this.counter = newLimit;
-				}
+					}
 				if (!this.timerID){
 					this.timerID = setInterval(this.countdown.bind(this), 100);
-				}
-			}
+					}
+				}	
 			return this.timerID;
 		},
 
 		countdown:function(){
-			if (this.state = START || this.state == BREAK){
+			if(this.run) {
+				return this.display
+			}else{
+				if (this.state == START || this.state == BREAK){
 				this.counter = this.limit - (Date.now() - this.startTime);
 
 				if(this.counter <= 0){
@@ -102,8 +107,9 @@ var app = new Vue({
 						this.startTime = Date.now();
 						this.limit = this.breakLength * 60 * 1000;
 						this.stateMsg = '-Break-';
+						}
 					}
-				}
+				}	
 			}
 			return this.counter;
 		},
@@ -124,3 +130,7 @@ var app = new Vue({
 });
 
 
+/*
+	Make run function that takes parameters if start button, param = start, if stop param = stop
+	write a recursive function that calls itsel
+*/
