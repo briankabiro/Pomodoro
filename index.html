@@ -1,28 +1,40 @@
+
+
 <!DOCTYPE html>
 <html>
-	<head></head>
+	<head>
+		<html lang="en">
+		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="index.css">
+	</head>
+		
 	<body>
-		<div class="wrapper">
+		<div class="wrapper" id="app">
+
 			<div class="pomodoro-window">
 				<h2>Pomodoro Timer</h2>	
 				<div class="length-text">
 					<span>Break Length</span>
 					<span>Session Length</span>
 				</div>
-				<div class="length-time-adjuster">
-					<span>-  5  +</span>
-					<span>-  25  +</span>
-				</div>
 
+				<div id="length-time-adjuster" >
+
+					<span id="minusBreakLength" v-on:click="minusBreakLength"> - </span>
+					 	{{breakLength}}
+					<span id="addBreakLength" v-on:click = "addBreakLength"> + </span>
+
+					<span id="minusSessionLength" v-on:click="minusSessionLength">-</span> {{sessionLength}} <span id="addSessionLength" v-on:click="addSessionLength">+</span>
+				
+				</div>
+					
 				<div id="circle-with-timer">
-					<span>25:00</span>
-					<span>Ticking</span>	
+					<span>{{stateMsg}}</span>
+					<span>{{display}}</span>	
 				</div>
 				<div id="button-area">
-					<button>Start</button>
-					<button>Stop</button>
-					<button>Reset</button>
+					<button v-on:click="start">Start</button>
+					<button v-on:click='reset'>Reset</button>
 				</div>
 				<div id="shortcut-info-box">
 					<h3>Keyboard Shortcuts</h3>
@@ -34,7 +46,10 @@
 				</div>	
 
 			</div>	
+			
 		</div>
-		
+
+		<script src="vue.js"></script>
+		<script src = "index.js"></script>
 	</body>
 </html>
