@@ -11,14 +11,14 @@
 	flex-flow:column nowrap;
 	height:65vh;
 	width:45vh;
-	background-color: #ff6347;
+	background-color: #DF3232;
 }
 .pomodoro-window > h2{
 	font-family: Helvetica;
 	text-align:center;
 }
 .pomodoro-window * {
-	color:white;
+	color:aliceblue;
 }
 .length-text,#length-time-adjuster{
 	display: flex;
@@ -46,8 +46,8 @@
 	align-items: center;
 	align-self: center;
 }
-#circle-with-timer:nth-child('2'){
-	font-size: 2em;
+#circle-with-timer:nth-child(1){
+	font-size: 5em;
 }
 #button-area{
 	margin-top:0.5em;
