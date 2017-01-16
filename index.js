@@ -12,8 +12,6 @@ try and use my own understanding to build
 var STOP = 0,
 	START= 1,
 	BREAK = 2,
-	PAUSE = 3,
-	TIMEOUT=4,
 	DEFAULT_TIME = 1500000,
 	DEFAULT_BREAK_TIME=300000;
 	var DEFAULT_MINUTE = 25,
@@ -24,15 +22,13 @@ var app = new Vue({
 	el:"#app",
 	data:{
 		limit: DEFAULT_TIME,
-		_limit: DEFAULT_TIME,
 		counter:DEFAULT_TIME,
 		sessionLength:25,
 		breakLength:5,
 		startTime:null,
 		timerID:null,
 		state:STOP,
-		stateMsg:'Session',
-		run: false
+		stateMsg:'Session'
 	},
 	computed:{
 		display:function(){
@@ -54,9 +50,10 @@ var app = new Vue({
 			else return sessionSeconds;
 		}
 	}, 
-	ready: function(){
+	ready(){
 
 	},
+
 	methods:{
 		addSessionLength: function(){
 			this.sessionLength = this.sessionLength + 1;
@@ -71,8 +68,7 @@ var app = new Vue({
 			this.breakLength = this.breakLength - 1; 
 		},
 		start:function(){
-				if(this.state != START){
-				this.run = false;
+				if(this.state != START){	
 				this.state = START;
 				this.startTime = Date.now();
 
@@ -90,9 +86,6 @@ var app = new Vue({
 		},
 
 		countdown:function(){
-			if(this.run) {
-				return this.display
-			}else{
 				if (this.state == START || this.state == BREAK){
 				this.counter = this.limit - (Date.now() - this.startTime);
 
@@ -110,7 +103,6 @@ var app = new Vue({
 						}
 					}
 				}	
-			}
 			return this.counter;
 		},
 
@@ -120,8 +112,10 @@ var app = new Vue({
 			this.sessionLength = DEFAULT_MINUTE;
 			this.breakLength = DEFAULT_BREAK;
 			clearInterval(this.timerID);
-			this.startTimer = this.timerID = null;
-			this.counter = this.limit = this._limit = DEFAULT_MINUTE;
+			this.startTime = null;
+			this.timerID = null;
+			this.limit = DEFAULT_TIME;
+			this.counter = DEFAULT_TIME;
 			return this.counter;
 		}
 
